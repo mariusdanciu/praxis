@@ -261,7 +261,7 @@ fn warn_stateful_filter_reset(config: &Config) {
     let has_stateful = config
         .filter_chains
         .iter()
-        .any(|c| c.filters.iter().any(|f| is_stateful_recursive(f)));
+        .any(|c| c.filters.iter().any(is_stateful_recursive));
 
     if has_stateful {
         warn!(

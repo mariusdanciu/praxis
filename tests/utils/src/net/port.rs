@@ -107,11 +107,7 @@ pub fn ipv6_available() -> bool {
 /// [`ipv6_available`] first).
 pub fn free_port_v6() -> u16 {
     for _ in 0..256 {
-        let port = TcpListener::bind("[::1]:0")
-            .unwrap()
-            .local_addr()
-            .unwrap()
-            .port();
+        let port = TcpListener::bind("[::1]:0").unwrap().local_addr().unwrap().port();
         if ALLOCATED_PORTS
             .lock()
             .unwrap_or_else(PoisonError::into_inner)

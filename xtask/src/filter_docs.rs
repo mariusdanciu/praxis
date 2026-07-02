@@ -784,13 +784,7 @@ fn build_filter(items: &ModuleItems, name: &str, config_type: Option<&str>) -> F
         .find(|(name, doc)| !doc.is_empty() && name.ends_with("Filter"))
         .or_else(|| items.struct_docs.iter().find(|(_, doc)| !doc.is_empty()))
         .map(|(_, doc)| doc.clone())
-        .or_else(|| {
-            items
-                .module_docs
-                .iter()
-                .find(|doc| !doc.is_empty())
-                .cloned()
-        })
+        .or_else(|| items.module_docs.iter().find(|doc| !doc.is_empty()).cloned())
         .unwrap_or_default();
 
     let description = first_paragraph(&description_doc);
